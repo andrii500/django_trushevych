@@ -1,0 +1,4 @@
+[flake8]
+exclude = __init__.py, asgi.py, settings.py, wsgi.py, tests.py, migrations, venv
+max-line-length = 120
+ignore = A003:wq
