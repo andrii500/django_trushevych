@@ -1,1 +1,2 @@
-# django_trushevych
+# hillel_homeworks
+Даний репозиторій був створений для здачі домашніх робіт.
