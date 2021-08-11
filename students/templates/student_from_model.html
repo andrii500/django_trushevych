@@ -1,16 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Student</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block head %}
+    {{ block.super }}
+    <style type="text/css">
+        body {
+            background-color: goldenrod;
+        }
+    </style>
+{% endblock %}
+{% block content %}
     <h2>Student creation form from model</h2>
-
-    <form action="/create-student/" method="post">
+    <form action="{% url 'create-student' %}" method="post">
         {% csrf_token %}
         {{ form }}
         <input type="submit" value="submit">
     </form>
-</body>
-</html>
+{% endblock %}

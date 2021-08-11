@@ -8,10 +8,12 @@
     </style>
 {% endblock %}
 {% block content %}
-    <h2>Teacher creation form from model</h2>
-    <form action="{% url 'create-teacher' %}" method="post">
+    <h1>Teacher edit form</h1>
+    <form action="{% url 'edit-teacher' teacher_id %}" method="post">
         {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="submit">
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Submit">
     </form>
 {% endblock %}
