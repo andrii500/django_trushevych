@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block head %}
+    {{ block.super }}
+    <style type="text/css">
+        body { background-color: #159ca3; }
+    </style>
+{% endblock %}
+{% block content %}
+    <h1>Groups List</h1>
+    <ul>
+        {% for group in groups %}
+        <li>
+            {{ group.id|safe }}. {{ group.title|safe }} {{ group.num_of_students|safe }}
+            <a href="{% url 'edit-group' group.id %}">Edit</a>
+            <a href="{% url 'delete-group' group.id %}">Delete</a>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
