@@ -10,7 +10,8 @@
     <ul>
         {% for student in students %}
         <li>
-            {{ student.id|safe }}. {{ student.first_name|safe }} {{ student.last_name|safe }}, age {{ student.age|safe}}
+            {{ student.id|safe }}. {{ student.first_name|safe }} {{ student.last_name|safe }}, age {{ student.age|safe}},
+            phone - {{ student.phone|safe }}
             <a href="{% url 'edit-student' student.id %}">Edit</a>
             <a href="{% url 'delete-student' student.id %}">Delete</a>
         </li>
