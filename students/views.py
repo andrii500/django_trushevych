@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.shortcuts import render
 from faker import Faker
 from .models import Student
-from .forms import StudentFormFromModel
+from .forms import StudentForm
 
 faker = Faker()
 
@@ -43,8 +43,13 @@ def get_students(request):
         return render(request, 'students.html', {'students': students_list})
 
 
+def fake_phone_number(fake):
+    return f'+380{fake.msisdn()[4:]}'
+
+
 def get_generate_student(request):
-    Student.objects.create(first_name=faker.first_name(), last_name=faker.last_name(), age=faker.random_int(18, 100))
+    Student.objects.create(first_name=faker.first_name(), last_name=faker.last_name(), age=faker.random_int(18, 100),
+                           phone=fake_phone_number(faker))
     return HttpResponseRedirect(reverse('students'))
 
 
@@ -55,7 +60,8 @@ def get_generate_students(request):
             for i in range(int(count)):
                 Student.objects.create(first_name=faker.first_name(),
                                        last_name=faker.last_name(),
-                                       age=faker.random_int(18, 100))
+                                       age=faker.random_int(18, 100),
+                                       phone=fake_phone_number(faker))
             return HttpResponseRedirect(reverse('students'))
         else:
             return HttpResponse("Count must be greater than 0, less or equal  than 100")
@@ -65,9 +71,9 @@ def get_generate_students(request):
 
 def create_student_from_model(request):
     if request.method == 'GET':
-        form = StudentFormFromModel()
+        form = StudentForm()
     elif request.method == 'POST':
-        form = StudentFormFromModel(request.POST)
+        form = StudentForm(request.POST)
 
         if form.is_valid():
             Student.objects.create(**form.cleaned_data)
@@ -78,13 +84,13 @@ def create_student_from_model(request):
 
 def edit_student(request, student_id):
     if request.method == 'POST':
-        form = StudentFormFromModel(request.POST)
+        form = StudentForm(request.POST)
         if form.is_valid():
             Student.objects.update_or_create(defaults=form.cleaned_data, id=student_id)
             return HttpResponseRedirect(reverse('students'))
     else:
         student = Student.objects.filter(id=student_id).first()
-        form = StudentFormFromModel(instance=student)
+        form = StudentForm(instance=student)
 
     return render(request, 'student_edit_form.html', {'form': form, 'student_id': student_id})
 
