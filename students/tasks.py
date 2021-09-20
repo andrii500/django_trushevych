@@ -50,7 +50,7 @@ def send_email(title, message, email_from):
         title,
         message,
         email_from,
-        ['andrson451@gmail.com'],
+        ['vitalik1996@gmail.com'],
         fail_silently=False,
     )
 
