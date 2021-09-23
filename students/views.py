@@ -12,7 +12,9 @@ faker = Faker()
 
 
 def index(request):
-    return HttpResponse("""<h2>Students</h2>
+    return HttpResponse("""<h2>Currency</h2>
+                           <p>Path: /exchange/</p>
+                           <h2>Students</h2>
                            <p>Path: /students/</p>
                            <p>Path: /students/?first_name=value&last_name=value&age=value</p>
                            <p>Path: /generate-student/</p>
