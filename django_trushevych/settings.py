@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'students',
     'group',
-    'teachers'
+    'teachers',
+    'currency',
 ]
 
 MIDDLEWARE = [
@@ -146,6 +147,10 @@ CELERY_BEAT_SCHEDULE = {
     'log_cleaner': {
         'task': 'students.tasks.log_cleaner',
         'schedule': crontab(minute=0, hour=0),
+    },
+    'currency': {
+        'task': 'currency.tasks.get_currency_rates',
+        'schedule': crontab(minute=0, hour=11),
     }
 }
 
