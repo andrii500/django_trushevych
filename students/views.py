@@ -12,27 +12,7 @@ faker = Faker()
 
 
 def index(request):
-    return HttpResponse("""<h2>Students</h2>
-                           <p>Path: /students/</p>
-                           <p>Path: /students/?first_name=value&last_name=value&age=value</p>
-                           <p>Path: /generate-student/</p>
-                           <p>Path: /generate-students/?count=value</p>
-                           <p>Path: /create-student/</p>
-                           <p>Path: /edit-student/student_id</p>
-                           <p>Path: /delete-student/student_id</p>
-                           <h2>Teachers</h2>
-                           <p>Path: /teachers/</p>
-                           <p>Path: /teachers/?first_name=value&last_name=value&age=value</p>
-                           <p>Path: /create-teacher/</p>
-                           <p>Path: /edit-teacher/teacher_id</p>
-                           <p>Path: /delete-teacher/teacher_id</p>
-                           <h2>Groups</h2>
-                           <p>Path: /groups/</p>
-                           <p>Path: /create-group/</p>
-                           <p>Path: /edit-group/group_id</p>
-                           <p>Path: /delete-group/group_id</p>
-                           <h2>Sent E-mail</h2>
-                           <p>Path: /email-sending-form/</p>""")
+    return render(request, 'index.html')
 
 
 def get_students(request):
