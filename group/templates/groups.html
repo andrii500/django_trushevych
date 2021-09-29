@@ -10,7 +10,9 @@
     <ul>
         {% for group in groups %}
         <li>
-            {{ group.id|safe }}. {{ group.title|safe }} {{ group.num_of_students|safe }}
+            <p>{{ group.id|safe }}. {{ group.title|safe }} {{ group.num_of_students|safe }}</p>
+            <p>Main student: {{ group.main_student|safe }}</p>
+            <p>Main teacher: {{ group.main_teacher|safe }}</p>
             <a href="{% url 'edit-group' group.id %}">Edit</a>
             <a href="{% url 'delete-group' group.id %}">Delete</a>
         </li>

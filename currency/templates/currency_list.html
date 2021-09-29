@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block head %}
+    {{ block.super }}
+    <style type="text/css">
+        body { background-color: #7ecc49; }
+    </style>
+{% endblock %}
+{% block content %}
+    <h1>Exchange List Rates</h1>
+    <ul>
+        {% for rate in currency_list %}
+        <li>
+            <p>{{ rate.id|safe }}. {{ rate.currency|safe }}</p>
+            <p>Created at: {{ rate.created_at|date:"d.m.Y H:i:s" }}</p>
+            <p>Source: {{ rate.source|safe }}</p>
+            <p>Buy price: {{ rate.buy_price|safe }}</p>
+            <p>Sell price: {{ rate.sell_price|safe }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
