@@ -1,21 +1,31 @@
 {% extends "base.html" %}
 {% block head %}
     {{ block.super }}
-    <style type="text/css">
-        body { background-color: #7ecc49; }
-    </style>
+    <title>Exchange List Rates</title>
 {% endblock %}
 {% block content %}
-    <h1>Exchange List Rates</h1>
-    <ul>
+    <table class="table table-dark table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Currency</th>
+          <th scope="col">Created at</th>
+          <th scope="col">Source</th>
+          <th scope="col">Buy price</th>
+          <th scope="col">Sell price</th>
+        </tr>
+      </thead>
+      <tbody>
         {% for rate in currency_list %}
-        <li>
-            <p>{{ rate.id|safe }}. {{ rate.currency|safe }}</p>
-            <p>Created at: {{ rate.created_at|date:"d.m.Y H:i:s" }}</p>
-            <p>Source: {{ rate.source|safe }}</p>
-            <p>Buy price: {{ rate.buy_price|safe }}</p>
-            <p>Sell price: {{ rate.sell_price|safe }}</p>
-        </li>
+          <tr>
+            <th scope="row">{{ rate.id|safe }}</th>
+            <td>{{ rate.currency|safe }}</td>
+            <td>{{ rate.created_at|date:"d.m.Y H:i:s" }}</td>
+            <td>{{ rate.source|safe }}</td>
+            <td>{{ rate.buy_price|safe }}</td>
+            <td>{{ rate.sell_price|safe }}</td>
+          </tr>
         {% endfor %}
-    </ul>
+      </tbody>
+    </table>
 {% endblock %}
