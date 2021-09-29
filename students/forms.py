@@ -3,6 +3,7 @@ import re
 from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
+from .models import Student
 
 
 def phone_number_validation(phone_number):
@@ -10,13 +11,14 @@ def phone_number_validation(phone_number):
         raise ValidationError(f"{phone_number}: Phone number format - +380xxxxxxxxx")
 
 
-class StudentForm(forms.Form):
-    first_name = forms.CharField(label="First name", required=True, max_length=100)
-    last_name = forms.CharField(label="Last name", required=True, max_length=100)
-    age = forms.IntegerField(label="Age", required=True)
+class StudentForm(forms.ModelForm):
     phone = forms.CharField(label="Phone", required=True,
                             empty_value=None, validators=[phone_number_validation],
                             widget=forms.TextInput(attrs={'placeholder': '+380xxxxxxxxx'}))
+
+    class Meta:
+        model = Student
+        fields = ['first_name', 'last_name', 'age', 'phone']
 
 
 class GenerateRandomStudentForm(forms.Form):

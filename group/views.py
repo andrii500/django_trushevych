@@ -1,45 +1,33 @@
-from django.http import HttpResponseRedirect
-from django.urls import reverse
-from django.shortcuts import render
-from faker import Faker
+from django.urls import reverse_lazy
+from django.shortcuts import redirect
+from django.views.generic import ListView, FormView, UpdateView, DeleteView
 from .models import Group
 from .forms import GroupFormFromModel
 
-faker = Faker()
+
+class GroupListView(ListView):
+    model = Group
 
 
-def get_groups(request):
-    groups_list = Group.objects.all()
-    return render(request, 'groups.html', {'groups': groups_list})
+class CreateGroupFormView(FormView):
+    template_name = 'group/group_from_model.html'
+    form_class = GroupFormFromModel
+
+    def form_valid(self, form):
+        Group.objects.create(**form.cleaned_data)
+        return redirect('groups')
 
 
-def create_group_from_model(request):
-    if request.method == 'GET':
-        form = GroupFormFromModel()
-    elif request.method == 'POST':
-        form = GroupFormFromModel(request.POST)
-
-        if form.is_valid():
-            Group.objects.create(**form.cleaned_data)
-            return HttpResponseRedirect(reverse('groups'))
-
-    return render(request, 'group_from_model.html', {'form': form})
+class EditGroupView(UpdateView):
+    model = Group
+    template_name = 'group/group_edit_form.html'
+    form_class = GroupFormFromModel
+    success_url = reverse_lazy('groups')
 
 
-def edit_group(request, group_id):
-    if request.method == 'POST':
-        form = GroupFormFromModel(request.POST)
-        if form.is_valid():
-            Group.objects.update_or_create(defaults=form.cleaned_data, id=group_id)
-            return HttpResponseRedirect(reverse('groups'))
-    else:
-        group = Group.objects.filter(id=group_id).first()
-        form = GroupFormFromModel(instance=group)
+class DeleteTeacherView(DeleteView):
+    model = Group
+    success_url = reverse_lazy('groups')
 
-    return render(request, 'group_edit_form.html', {'form': form, 'group_id': group_id})
-
-
-def delete_group(request, group_id):
-    group = Group.objects.filter(id=group_id)
-    group.delete()
-    return HttpResponseRedirect(reverse('groups'))
+    def get(self, *args, **kwargs):
+        return self.post(*args, **kwargs)

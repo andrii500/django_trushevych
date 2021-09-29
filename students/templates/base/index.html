@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base/base.html" %}
 {% block head %}
     {{ block.super }}
     <title>Django Project</title>
@@ -22,7 +22,7 @@
                 <td><a href="/teachers/">teachers</a></td>
                 <td><a href="/groups/">groups</a></td>
                 <td><a href="/email-sending-form/">Send Email</a></td>
-                <td><a href="/exchange/">exchange</a></td>
+                <td><a href="/currency/">currency</a></td>
             </tr>
             <tr>
                 <th>2</th>
@@ -58,17 +58,25 @@
             </tr>
             <tr>
                 <th>6</th>
-                <td>/edit-student/student_id</td>
-                <td>/edit-teacher/teacher_id</td>
-                <td>/edit-group/group_id</td>
+                <td>/edit-student/student_id/</td>
+                <td>/edit-teacher/teacher_id/</td>
+                <td>/edit-group/group_id/</td>
                 <td></td>
                 <td></td>
             </tr>
             <tr>
                 <th>7</th>
-                <td>/delete-student/student_id</td>
-                <td>/delete-teacher/teacher_id</td>
-                <td>/delete-group/group_id</td>
+                <td>/delete-student/student_id/</td>
+                <td>/delete-teacher/teacher_id/</td>
+                <td>/delete-group/group_id/</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>8</th>
+                <td><a href="/generate-students-form/">generate-students-form</a></td>
+                <td></td>
+                <td></td>
                 <td></td>
                 <td></td>
             </tr>
