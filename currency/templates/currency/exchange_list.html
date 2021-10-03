@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base/base.html" %}
 {% block head %}
     {{ block.super }}
     <title>Exchange List Rates</title>
@@ -16,7 +16,7 @@
         </tr>
       </thead>
       <tbody>
-        {% for rate in currency_list %}
+        {% for rate in exchange_list %}
           <tr>
             <th scope="row">{{ rate.id|safe }}</th>
             <td>{{ rate.currency|safe }}</td>

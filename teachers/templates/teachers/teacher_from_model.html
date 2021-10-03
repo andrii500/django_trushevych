@@ -1,7 +1,7 @@
-{% extends "base.html" %}
+{% extends "base/base.html" %}
 {% block head %}
     {{ block.super }}
-    <title>Student from model</title>
+    <title>Teacher creation form from model</title>
     <style type="text/css">
         body {
             background-color: goldenrod;
@@ -9,8 +9,8 @@
     </style>
 {% endblock %}
 {% block content %}
-    <h2>Student creation form from model</h2>
-    <form action="{% url 'create-student' %}" method="post">
+    <h2>Teacher creation form from model</h2>
+    <form action="{% url 'create-teacher' %}" method="post">
         {% csrf_token %}
         {{ form }}
         <input type="submit" value="submit">

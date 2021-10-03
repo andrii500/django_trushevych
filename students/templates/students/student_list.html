@@ -1,0 +1,28 @@
+{% extends "base/base.html" %}
+{% block head %}
+    {{ block.super }}
+    <title>Student list</title>
+    <style type="text/css">
+        body { background-color: #159ca3; }
+        p { margin: 0; }
+        li { margin: 0 0 10px 0; }
+        a { color: blue; }
+    </style>
+{% endblock %}
+{% block content %}
+    <h1>Students List</h1>
+    <ul>
+        {% for student in student_list %}
+        <li>
+            <p>{{ student.id|safe }}. {{ student.first_name|safe }} {{ student.last_name|safe }}</p>
+            <span>age {{ student.age|safe}}</span>
+            <span>phone - {{ student.phone|safe }}</span>
+            <span>group number {{ student.group_id.id|safe }} - {{ student.group_id|safe }}</span>
+            <div>
+                <a href="{% url 'edit-student' student.id %}">Edit</a>
+                <a href="{% url 'delete-student' student.id %}">Delete</a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

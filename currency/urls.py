@@ -3,5 +3,5 @@ from . import views
 
 
 urlpatterns = [
-    path('exchange/', views.list_exchange_rates, name='list-exchange-rates'),
+    path('currency/', views.ExchangeRateListView.as_view(), name='list-currency-rates'),
 ]

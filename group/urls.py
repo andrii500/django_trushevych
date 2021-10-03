@@ -3,8 +3,8 @@ from . import views
 
 
 urlpatterns = [
-    path('groups/', views.get_groups, name='groups'),
-    path('create-group/', views.create_group_from_model, name='create-group'),
-    path('edit-group/<int:group_id>', views.edit_group, name='edit-group'),
-    path('delete-group/<int:group_id>', views.delete_group, name='delete-group')
+    path('groups/', views.GroupListView.as_view(), name='groups'),
+    path('create-group/', views.CreateGroupFormView.as_view(), name='create-group'),
+    path('edit-group/<int:pk>/', views.EditGroupView.as_view(), name='edit-group'),
+    path('delete-group/<int:pk>/', views.DeleteTeacherView.as_view(), name='delete-group')
 ]
