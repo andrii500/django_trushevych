@@ -99,10 +99,6 @@ def test_handler404():
     assert '<h2>This page was not found check your link.</h2>' in response.content.decode()
 
 
-def test_handler500():
-    pass
-
-
 def test_student_form():
     form = StudentForm(data={'first_name': 'A', 'last_name': 'T', 'age': 27, 'phone': '+380906006060'})
     assert form.is_valid()

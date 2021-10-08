@@ -25,7 +25,7 @@ class EditGroupView(UpdateView):
     success_url = reverse_lazy('groups')
 
 
-class DeleteTeacherView(DeleteView):
+class DeleteGroupView(DeleteView):
     model = Group
     success_url = reverse_lazy('groups')
 
