@@ -73,3 +73,17 @@ def test_delete_group_view():
 
     Client().get('/delete-group/1/')
     assert Group.objects.count() == 0
+
+
+@pytest.mark.django_db
+def test_group_form_from_model():
+    Client().post('/create-student/', data={'first_name': 'A', 'last_name': 'T', 'age': 27, 'phone': '+380906006060'})
+    Client().post('/create-teacher/', data={'first_name': 'A', 'last_name': 'T', 'subject': 'math', 'age': 27})
+    instance_student = Student.objects.get(id=1)
+    instance_teacher = Teacher.objects.get(id=1)
+
+    form = GroupFormFromModel(data={'title': 'Math',
+                                    'num_of_students': 10,
+                                    'main_student': instance_student.id,
+                                    'main_teacher': instance_teacher.id})
+    assert form.is_valid()
