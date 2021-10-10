@@ -147,17 +147,17 @@ CELERY_BROKER_URL = 'amqp://localhost'
 CELERY_TIMEZONE = "Europe/Kiev"
 
 
-CELERY_BEAT_SCHEDULE = {
-    'log_cleaner': {
-        'task': 'students.tasks.log_cleaner',
-        'schedule': crontab(minute=0, hour=0),
-    },
-    'currency': {
-        'task': 'currency.tasks.get_currency_rates',
-        # 'schedule': 10,
-        'schedule': crontab(minute=0, hour=11),
-    }
-}
+# CELERY_BEAT_SCHEDULE = {
+#     'log_cleaner': {
+#         'task': 'students.tasks.log_cleaner',
+#         'schedule': crontab(minute=0, hour=0),
+#     },
+#     'currency': {
+#         'task': 'currency.tasks.get_currency_rates',
+#         # 'schedule': 10,
+#         'schedule': crontab(minute=0, hour=11),
+#     }
+# }
 
 # SMTP settings
 EMAIL_HOST = 'smtp.gmail.com'
