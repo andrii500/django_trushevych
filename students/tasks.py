@@ -36,24 +36,22 @@ def create_random_students(total):
 
 @shared_task
 def log_cleaner():
-    # logs = Logger.objects.filter(created__lte=datetime.now() - timedelta(days=7)).all()
-    # if logs:
-    #     logs.delete()
-    #     return 'Logs for 7 days have been deleted!'
-    # else:
-    #     return 'You have not logs older than 7 days!'
-    pass
+    logs = Logger.objects.filter(created__lte=datetime.now() - timedelta(days=7)).all()
+    if logs:
+        logs.delete()
+        return 'Logs for 7 days have been deleted!'
+    else:
+        return 'You have not logs older than 7 days!'
 
 
 @shared_task
 def send_email(title, message, email_from):
-    # send_mail(
-    #     title,
-    #     message,
-    #     email_from,
-    #     ['vitalik1996@gmail.com'],
-    #     fail_silently=False,
-    # )
-    #
-    # return 'E-mail was sent!'
-    pass
+    send_mail(
+        title,
+        message,
+        email_from,
+        ['vitalik1996@gmail.com'],
+        fail_silently=False,
+    )
+
+    return 'E-mail was sent!'

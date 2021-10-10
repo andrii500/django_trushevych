@@ -1,2 +1,2 @@
 web: gunicorn django_trushevych.wsgi:application --log-file -
-worker: celery worker --app=tasks.app
+worker: celery worker --app=tasks.create_random_students
