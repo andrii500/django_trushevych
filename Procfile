@@ -1,2 +1,2 @@
 web: gunicorn django_trushevych.wsgi:application --log-file -
-worker: celery worker --app=tasks.app
+worker: celery -A django_dontsov worker --beat --concurrency 10 -l info
