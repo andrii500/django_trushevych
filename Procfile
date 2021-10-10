@@ -1,2 +1,2 @@
 web: gunicorn django_trushevych.wsgi:application --log-file -
-worker: celery -A tasks worker --loglevel=INFO
+worker: celery -A django_trushevych worker --loglevel=INFO
