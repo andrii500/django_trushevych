@@ -143,7 +143,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Celery settings
-CELERY_BROKER_URL = 'amqp://localhost'
+# CELERY_BROKER_URL = 'amqp://localhost'
 CELERY_TIMEZONE = "Europe/Kiev"
 
 
