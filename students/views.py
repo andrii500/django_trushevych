@@ -8,6 +8,8 @@ from .models import Student
 from .forms import StudentForm, GenerateRandomStudentForm, ContactUsForm
 from .tasks import create_random_students, send_email
 
+from django.contrib.auth.decorators import login_required
+
 faker = Faker()
 
 
@@ -15,6 +17,7 @@ def fake_phone_number(fake):
     return f'+380{fake.msisdn()[4:]}'
 
 
+# @login_required(login_url='login/')
 class IndexView(TemplateView):
     template_name = 'base/index.html'
 

@@ -24,6 +24,7 @@ urlpatterns = [
     path('', include('group.urls')),
     path('', include('teachers.urls')),
     path('', include('currency.urls')),
+    path('', include('signup.urls')),
     path('admin/', admin.site.urls),
 ]
 handler404 = 'students.views.handler404'
