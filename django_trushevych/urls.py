@@ -20,12 +20,12 @@ from django.urls import include, path
 
 urlpatterns = [
     path('project-debug/', include(debug_toolbar.urls)),
+    path('admin/', admin.site.urls),
     path('', include('students.urls')),
     path('', include('group.urls')),
     path('', include('teachers.urls')),
     path('', include('currency.urls')),
-    path('', include('signup.urls')),
-    path('admin/', admin.site.urls),
+    path('', include('authentication.urls')),
 ]
 handler404 = 'students.views.handler404'
 handler500 = 'students.views.handler500'

@@ -53,8 +53,11 @@ INSTALLED_APPS = [
     'group',
     'teachers',
     'currency',
-    'signup',
+    'authentication',
+    'crispy_forms',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -156,7 +159,6 @@ CELERY_BEAT_SCHEDULE = {
     },
     'currency': {
         'task': 'currency.tasks.get_currency_rates',
-        # 'schedule': 10,
         'schedule': crontab(minute=0, hour=11),
     }
 }
@@ -182,3 +184,7 @@ STATIC_URL = '/static/'
 
 # Simplified static file serving.
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+LOGIN_REDIRECT_URL = 'index'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

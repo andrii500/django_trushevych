@@ -8,12 +8,44 @@
 </head>
 <body>
     {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
+        <ul class="messages" style="padding: 0">
+            {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }} alert alert-info"{% endif %} style="list-style-type: none;">{{ message }}</li>
+            {% endfor %}
+        </ul>
     {% endif %}
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Django</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <p class="nav-link" style="margin: 0; color: black;">Welcome, {{user.username}}</p>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/password_change">Password change</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/password_reset">Password reset</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/registration">Registration</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
     <div id="content">{% block content %}{% endblock %}</div>
 </body>
 </html>

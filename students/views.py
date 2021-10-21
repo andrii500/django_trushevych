@@ -3,12 +3,11 @@ from django.urls import reverse_lazy
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView, ListView, View, FormView, UpdateView, DeleteView
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from faker import Faker
 from .models import Student
 from .forms import StudentForm, GenerateRandomStudentForm, ContactUsForm
 from .tasks import create_random_students, send_email
-
-from django.contrib.auth.decorators import login_required
 
 faker = Faker()
 
@@ -17,7 +16,6 @@ def fake_phone_number(fake):
     return f'+380{fake.msisdn()[4:]}'
 
 
-# @login_required(login_url='login/')
 class IndexView(TemplateView):
     template_name = 'base/index.html'
 
@@ -35,7 +33,8 @@ class StudentListView(ListView):
         return queryset
 
 
-class GenerateStudentView(View):
+class GenerateStudentView(LoginRequiredMixin, View):
+    login_url = '/login/'
 
     def get(self, request, *args, **kwargs):
         Student.objects.create(first_name=faker.first_name(),
@@ -45,7 +44,8 @@ class GenerateStudentView(View):
         return redirect('students')
 
 
-class GenerateStudentsView(View):
+class GenerateStudentsView(LoginRequiredMixin, View):
+    login_url = '/login/'
 
     def get(self, request, *args, **kwargs):
         count = request.GET.get("count", "1")
@@ -63,33 +63,37 @@ class GenerateStudentsView(View):
             return HttpResponse("Count must be integer and not negative")
 
 
-class CreateStudentFormView(FormView):
+class CreateStudentFormView(LoginRequiredMixin, FormView):
     template_name = 'students/student_from_model.html'
     form_class = StudentForm
+    login_url = '/login/'
 
     def form_valid(self, form):
         Student.objects.create(**form.cleaned_data)
         return redirect('students')
 
 
-class EditStudentView(UpdateView):
+class EditStudentView(LoginRequiredMixin, UpdateView):
     model = Student
     template_name = 'students/student_edit_form.html'
     form_class = StudentForm
     success_url = reverse_lazy('students')
+    login_url = '/login/'
 
 
-class DeleteStudentView(DeleteView):
+class DeleteStudentView(LoginRequiredMixin, DeleteView):
     model = Student
     success_url = reverse_lazy('students')
+    login_url = '/login/'
 
     def get(self, *args, **kwargs):
         return self.post(*args, **kwargs)
 
 
-class ManuallyGenerateStudentsFormView(FormView):
-    template_name = 'students/student_generator.html'
+class ManuallyGenerateStudentsFormView(LoginRequiredMixin, FormView):
     form_class = GenerateRandomStudentForm
+    template_name = 'students/student_generator.html'
+    login_url = '/login/'
 
     def form_valid(self, form):
         total = form.cleaned_data.get('total')
@@ -98,10 +102,11 @@ class ManuallyGenerateStudentsFormView(FormView):
         return redirect('students')
 
 
-class SendingEmailView(FormView):
-    template_name = 'email/email_sending_form.html'
+class SendingEmailView(LoginRequiredMixin, FormView):
     form_class = ContactUsForm
+    template_name = 'email/email_sending_form.html'
     success_url = reverse_lazy('email-sending-form')
+    login_url = '/login/'
 
     def form_valid(self, form):
         title = form.cleaned_data.get('title')
