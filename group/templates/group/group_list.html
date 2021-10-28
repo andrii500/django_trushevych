@@ -5,7 +5,6 @@
     <style type="text/css">
         body { background-color: #159ca3; }
         p { margin: 0; }
-        li { margin: 0 0 10px 0; }
         a { color: blue; }
     </style>
 {% endblock %}
@@ -13,7 +12,7 @@
     <h1>Groups List</h1>
     <ul>
         {% for group in group_list %}
-        <li>
+        <li style="margin: 0 0 10px 0;">
             <p>{{ group.id|safe }}. {{ group.title|safe }} {{ group.num_of_students|safe }}</p>
             <span>Main student: {{ group.main_student|safe }}</span>
             <span>Main teacher: {{ group.main_teacher|safe }}</span>
