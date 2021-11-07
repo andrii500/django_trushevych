@@ -13,7 +13,6 @@ def get_currency_rates():
         for rate in response_monobank.json():
             if str(rate.get('currencyCodeA')) in [currency[0] for currency in CURRENCIES] and\
                     str(rate.get('currencyCodeB')) not in [currency[0] for currency in CURRENCIES]:
-                print(123)
                 if rate.get('currencyCodeA') == 840:
                     cur_name = 'USD'
                 elif rate.get('currencyCodeA') == 978:

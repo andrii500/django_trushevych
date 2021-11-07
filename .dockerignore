@@ -1,0 +1,16 @@
+db
+**/*.db
+venv
+.env
+Procfile
+.git
+.gitignore
+.flake8
+README.md
+runtime.txt
+.travis.yml
+
+.DS_Store
+**/.DS_Store
+.idea
+**/.idea
