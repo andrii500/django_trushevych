@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  web:
+    image: andrson451/django_trushevych
+    command: python manage.py runserver 0.0.0.0:3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+
+  rabbitmq:
+    image: rabbitmq
+    hostname: rabbit
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    expose:
+      - 15672
+      - 5672
+
+  celery-worker:
+    image: celery
+    command: celery -A django_trushevych worker -l info
+    depends_on:
+      - db
+      - rabbitmq
+
+    # celery-beat:
