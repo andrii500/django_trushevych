@@ -9,12 +9,17 @@ services:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5432:5432
 
   web:
+    build:
+      context: .
+      dockerfile: Dockerfile
     image: andrson451/django_trushevych
-    command: python manage.py runserver 0.0.0.0:3000
+    command: runserver 0.0.0.0:3000
     ports:
-      - "3000:3000"
+      - 3000:3000
     depends_on:
       - db
 
@@ -22,17 +27,24 @@ services:
     image: rabbitmq
     hostname: rabbit
     ports:
-      - "15672:15672"
-      - "5672:5672"
-    expose:
-      - 15672
-      - 5672
+      - 15672:15672
+      - 5672:5672
+
 
   celery-worker:
-    image: celery
-    command: celery -A django_trushevych worker -l info
+    build:
+      context: .
+      dockerfile: Dockerfile-celery
+    command: -A django_trushevych worker -l info
     depends_on:
       - db
       - rabbitmq
 
-    # celery-beat:
+  celery-beat:
+    build:
+      context: .
+      dockerfile: Dockerfile-celery
+    command: -A django_trushevych beat -l info
+    depends_on:
+      - db
+      - rabbitmq
