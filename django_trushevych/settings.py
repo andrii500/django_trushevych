@@ -98,7 +98,7 @@ WSGI_APPLICATION = 'django_trushevych.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'db/db.sqlite3',
     }
 }
 
@@ -148,7 +148,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Celery settings
-# CELERY_BROKER_URL = 'amqp://localhost'
+CELERY_BROKER_URL = 'amqp://localhost'
 CELERY_TIMEZONE = "Europe/Kiev"
 
 
@@ -160,6 +160,7 @@ CELERY_BEAT_SCHEDULE = {
     'currency': {
         'task': 'currency.tasks.get_currency_rates',
         'schedule': crontab(minute=0, hour=11),
+        # 'schedule': 10
     }
 }
 
