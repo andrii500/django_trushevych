@@ -29,11 +29,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'cg#p$g+j9tax!#a3cup@1$8obt2_+&k3q+pmu)5%asj6yjpkag')
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'test')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', True)
+# DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -69,6 +69,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'students.middleware.LogMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'django_trushevych.urls'
@@ -160,7 +161,7 @@ CELERY_BEAT_SCHEDULE = {
     'currency': {
         'task': 'currency.tasks.get_currency_rates',
         'schedule': crontab(minute=0, hour=11),
-        # 'schedule': 10
+        #'schedule': 10
     }
 }
 
