@@ -33,7 +33,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'cg#p$g+j9tax!#a3cup@1$8obt2_+&
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
-DEBUG = True
+DEBUG = ''
 
 ALLOWED_HOSTS = ['*']
 
@@ -97,8 +97,14 @@ WSGI_APPLICATION = 'django_trushevych.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db/db.sqlite3',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db/db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'db',
+        'PORT': '5432',
     }
 }
 
